@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -79,7 +79,7 @@
 
     var button = document.createElement("button");
     button.innerHTML = "重新抽奖";
-    button.id = "1433224";
+    button.id = "1433223";
     button.onclick = start;
     button.className = "button";
     button.style.display = "none";
