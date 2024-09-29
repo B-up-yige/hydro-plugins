@@ -1,9 +1,12 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  https://github.com/B-up-yige/hydro-plugins
-// @author       You
+// @author       yige123
+// @homepage     https://github.com/B-up-yige/hydro-plugins
+// @downloadURL  https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
+// @updateURL    https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
 
 // @match        *://www.gxustoj.com/*/contest/*/scoreboard
 // @match        *://www.gxustoj.com/contest/*/scoreboard
@@ -69,6 +72,13 @@
         var button = document.getElementById("1145141");
         button.innerHTML = "保存结果";
         button.onclick = save;
+
+        button = document.createElement("button");
+        button.innerHTML = "重新抽奖";
+        button.id = "1433224";
+        button.onclick = start;
+        button.className = "button";
+        document.getElementsByClassName("section__header")[0].appendChild(button);
     }
 
 
