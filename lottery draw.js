@@ -2,7 +2,7 @@
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
 // @version      2024-09-29
-// @description  try to take over the world!
+// @description  https://github.com/B-up-yige/hydro-plugins
 // @author       You
 
 // @match        *://www.gxustoj.com/*/contest/*/scoreboard
