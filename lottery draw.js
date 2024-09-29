@@ -74,7 +74,7 @@
         button.onclick = save;
 
         button = document.getElementById("1433223");
-        button.style.display = "block";
+        button.style.display = "inline";
     }
 
     var button = document.createElement("button");
