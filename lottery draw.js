@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.1.1
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -64,8 +64,7 @@
         if(time)setTimeout(draw, ms, time-1, ms+25);
         else{
             var button = document.getElementById("1145141");
-            button.innerHTML = "保存结果";
-            button.onclick = save;
+            button.innerHTML = "重新抽奖";
 
             button = document.getElementById("1433223");
             button.style.display = "inline";
@@ -78,6 +77,11 @@
     function start(){
         if(single)return ;
         else single = 1;
+
+        var button = document.getElementById("1145141");
+        button.innerHTML = "抽奖中...";
+        button = document.getElementById("1433223");
+        button.style.display = "none";
 
         valid = [];
 
@@ -99,28 +103,20 @@
             }
         }
         draw(20, 25);
-
-        // res = valid.sort(() => Math.random() - 0.5).slice(0, 4);
-        // console.log(res);
-        // for(var i = 0; i < user.length; i++){
-        //     if(res.includes(i))user[i].style.backgroundColor = "#FF0080";
-        //     else user[i].style.backgroundColor = "";
-        // }
-
     }
-
-    var button = document.createElement("button");
-    button.innerHTML = "重新抽奖";
-    button.id = "1433223";
-    button.onclick = start;
-    button.className = "button";
-    button.style.display = "none";
-    document.getElementsByClassName("section__header")[0].appendChild(button);
 
     button = document.createElement("button");
     button.innerHTML = "开始抽奖";
     button.id = "1145141";
     button.onclick = start;
     button.className = "button";
+    document.getElementsByClassName("section__header")[0].appendChild(button);
+
+    var button = document.createElement("button");
+    button.innerHTML = "保存结果";
+    button.id = "1433223";
+    button.onclick = save;
+    button.className = "button";
+    button.style.display = "none";
     document.getElementsByClassName("section__header")[0].appendChild(button);
 })();
