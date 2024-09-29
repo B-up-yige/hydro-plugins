@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      2024-09-29
+// @version      2024-09-29 16:14
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       You
 
