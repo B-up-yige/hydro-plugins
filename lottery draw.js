@@ -8,8 +8,8 @@
 // @downloadURL  https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
 // @updateURL    https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
 
-// @match        *://*gxustoj.com/*/contest/*/scoreboard
-// @match        *://*gxustoj.com/contest/*/scoreboard
+// @match        *://*.gxustoj.com/*/contest/*/scoreboard
+// @match        *://*.gxustoj.com/d/contest/*/scoreboard
 
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gxustoj.com
 // @grant        none
@@ -25,7 +25,7 @@
     var ioi = board.getElementsByClassName("col--total_score");
     var rank = board.getElementsByClassName("col--rank");
     var user = board.getElementsByClassName("col--user");
-    var res;
+    var res, valid, single;
 
     //转换文本为临时文件
     function downloadTextFile(text, fileName) {
@@ -53,10 +53,33 @@
         downloadTextFile(resName.join("\n"), "抽奖结果");
     }
 
+    function draw(time, ms){
+        res = valid.sort(() => Math.random() - 0.5).slice(0, 4);
+        for(var i = 0; i < user.length; i++){
+            if(res.includes(i))user[i].style.backgroundColor = "#FF0080";
+            else user[i].style.backgroundColor = "";
+        }
+
+        console.log(1)
+        if(time)setTimeout(draw, ms, time-1, ms+25);
+        else{
+            var button = document.getElementById("1145141");
+            button.innerHTML = "保存结果";
+            button.onclick = save;
+
+            button = document.getElementById("1433223");
+            button.style.display = "inline";
+
+            single = 0;
+        }
+    }
+
     //开始抽奖
     function start(){
+        if(single)return ;
+        else single = 1;
 
-        var valid = [];
+        valid = [];
 
         if(acm.length){
             for(var i = 0; i < acm.length; i++){
@@ -75,22 +98,15 @@
                 }
             }
         }
-        
-        console.log(valid);
+        draw(20, 25);
 
-        res = valid.sort(() => Math.random() - 0.5).slice(0, 4);
-        console.log(res);
-        for(i = 0; i < user.length; i++){
-            if(res.includes(i))user[i].style.backgroundColor = "#FF0080";
-            else user[i].style.backgroundColor = "";
-        }
+        // res = valid.sort(() => Math.random() - 0.5).slice(0, 4);
+        // console.log(res);
+        // for(var i = 0; i < user.length; i++){
+        //     if(res.includes(i))user[i].style.backgroundColor = "#FF0080";
+        //     else user[i].style.backgroundColor = "";
+        // }
 
-        var button = document.getElementById("1145141");
-        button.innerHTML = "保存结果";
-        button.onclick = save;
-
-        button = document.getElementById("1433223");
-        button.style.display = "inline";
     }
 
     var button = document.createElement("button");
