@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -74,7 +74,7 @@
         button.onclick = save;
 
         button = document.getElementById("1433223");
-        button.hidden = false;
+        button.style.display = "block";
     }
 
     var button = document.createElement("button");
@@ -82,7 +82,7 @@
     button.id = "1433224";
     button.onclick = start;
     button.className = "button";
-    button.hidden = true;
+    button.style.display = "none";
     document.getElementsByClassName("section__header")[0].appendChild(button);
 
     button = document.createElement("button");
@@ -90,6 +90,5 @@
     button.id = "1145141";
     button.onclick = start;
     button.className = "button";
-    button.hidden = false
     document.getElementsByClassName("section__header")[0].appendChild(button);
 })();
