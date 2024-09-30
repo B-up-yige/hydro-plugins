@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.2.0
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -17,8 +17,7 @@
 
 (function() {
     'use strict';
-
-    // Your code here...
+    
     console.log("catch!");
     var board = document.getElementsByTagName("tbody")[0];
     var acm = board.getElementsByClassName("col--solved");
@@ -26,6 +25,7 @@
     var rank = board.getElementsByClassName("col--rank");
     var user = board.getElementsByClassName("col--user");
     var res, valid, single;
+    var numberOfPeople = 4;
 
     //转换文本为临时文件
     function downloadTextFile(text, fileName) {
@@ -53,14 +53,14 @@
         downloadTextFile(resName.join("\n"), "抽奖结果");
     }
 
+    //抽奖动画
     function draw(time, ms){
-        res = valid.sort(() => Math.random() - 0.5).slice(0, 4);
+        res = valid.sort(() => Math.random() - 0.5).slice(0, numberOfPeople);
         for(var i = 0; i < user.length; i++){
             if(res.includes(i))user[i].style.backgroundColor = "#FF0080";
             else user[i].style.backgroundColor = "";
         }
 
-        console.log(1)
         if(time)setTimeout(draw, ms, time-1, ms+25);
         else{
             var button = document.getElementById("1145141");
@@ -68,6 +68,9 @@
 
             button = document.getElementById("1433223");
             button.style.display = "inline";
+
+            var div = document.getElementById("getNumberOfPeople");
+            div.style.display = "inline";
 
             single = 0;
         }
@@ -82,6 +85,11 @@
         button.innerHTML = "抽奖中...";
         button = document.getElementById("1433223");
         button.style.display = "none";
+        var div = document.getElementById("getNumberOfPeople");
+        var input = div.getElementsByTagName("input")[0];
+        div.style.display = "none";
+
+        numberOfPeople = input.value;
 
         valid = [];
 
@@ -105,18 +113,31 @@
         draw(20, 25);
     }
 
-    button = document.createElement("button");
+    var button = document.createElement("button");
     button.innerHTML = "开始抽奖";
     button.id = "1145141";
     button.onclick = start;
     button.className = "button";
     document.getElementsByClassName("section__header")[0].appendChild(button);
 
-    var button = document.createElement("button");
+    button = document.createElement("button");
     button.innerHTML = "保存结果";
     button.id = "1433223";
     button.onclick = save;
     button.className = "button";
     button.style.display = "none";
     document.getElementsByClassName("section__header")[0].appendChild(button);
+
+    var input = document.createElement("input");
+    input.value = Math.min(numberOfPeople, user.length);
+    input.type = "number";
+    input.max = user.length;
+    input.min = 1;
+    var div = document.createElement("div")
+    div.innerHTML = "人数：";
+    div.id = "getNumberOfPeople";
+    div.style.marginLeft = "10px";
+    div.style.display = "inline";
+    div.appendChild(input);
+    document.getElementsByClassName("section__header")[0].appendChild(div);
 })();
