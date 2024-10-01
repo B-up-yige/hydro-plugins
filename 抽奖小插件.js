@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.2.2
+// @version      1.2.3
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -76,21 +76,8 @@
         }
     }
 
-    //开始抽奖
-    function start(){
-        if(single)return ;
-        else single = 1;
-
-        var button = document.getElementById("1145141");
-        button.innerHTML = "抽奖中...";
-        button = document.getElementById("1433223");
-        button.style.display = "none";
-        var div = document.getElementById("getNumberOfPeople");
-        var input = div.getElementsByTagName("input")[0];
-        div.style.display = "none";
-
-        numberOfPeople = input.value;
-
+    //获取有效人数
+    function getValid(){
         valid = [];
 
         if(acm.length){
@@ -110,10 +97,39 @@
                 }
             }
         }
+    }
+
+    //开始抽奖
+    function start(){
+        if(single)return ;
+        else single = 1;
+
+        var button = document.getElementById("1145141");
+        button.innerHTML = "抽奖中...";
+        button = document.getElementById("1433223");
+        button.style.display = "none";
+        var div = document.getElementById("getNumberOfPeople");
+        var input = div.getElementsByTagName("input")[0];
+        div.style.display = "none";
+
+        numberOfPeople = input.value;
+
+        getValid();
+
         draw(20, 25);
     }
 
     var button = document.createElement("button");
+    button.innerHTML = "获取有效参与人数";
+    button.id = "getValidNumber";
+    button.onclick = function (){
+        getValid();
+        alert("有效参与人数为：" + valid.length);
+    };
+    button.className = "button";
+    document.getElementsByClassName("section__header")[0].appendChild(button);
+
+    button = document.createElement("button");
     button.innerHTML = "开始抽奖";
     button.id = "1145141";
     button.onclick = start;
@@ -133,6 +149,7 @@
     input.type = "number";
     input.max = user.length;
     input.min = 1;
+
     var div = document.createElement("div")
     div.innerHTML = "人数：";
     div.id = "getNumberOfPeople";
