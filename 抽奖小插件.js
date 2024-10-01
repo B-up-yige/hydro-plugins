@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.2.0
+// @version      1.2.1
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
-// @downloadURL  https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
-// @updateURL    https://github.com/B-up-yige/hydro-plugins/raw/refs/heads/main/lottery%20draw.js
+// @downloadURL  https://raw.githubusercontent.com/B-up-yige/hydro-plugins/refs/heads/main/%E6%8A%BD%E5%A5%96%E5%B0%8F%E6%8F%92%E4%BB%B6.js
+// @updateURL    https://raw.githubusercontent.com/B-up-yige/hydro-plugins/refs/heads/main/%E6%8A%BD%E5%A5%96%E5%B0%8F%E6%8F%92%E4%BB%B6.js
 
 // @match        *://*.gxustoj.com/*/contest/*/scoreboard
 // @match        *://*.gxustoj.com/d/contest/*/scoreboard
