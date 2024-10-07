@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.2.4
+// @version      1.2.5
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -147,7 +147,7 @@
     var input = document.createElement("input");
     input.value = Math.min(numberOfPeople, user.length);
     input.type = "number";
-    input.max = user.length;
+    input.max = valid.length;
     input.min = 1;
 
     var div = document.createElement("div")
