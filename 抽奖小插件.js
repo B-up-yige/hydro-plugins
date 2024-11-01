@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.2.7
+// @version      1.2.8
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -125,13 +125,19 @@
         draw(20, 25);
     }
 
-    getValid();
+    getValid(0);
 
     var button = document.createElement("button");
     button.innerHTML = "获取有效参与人数";
     button.id = "getValidNumber";
     button.onclick = function (){
-        getValid();
+        var scLimit = 0;
+        if(ioi.length){
+            div = document.getElementById("scoreLimit");
+            input = div.getElementsByTagName("input")[0];
+            scLimit = input.value;
+        }
+        getValid(scLimit);
         alert("有效参与人数为：" + valid.length);
     };
     button.className = "button";
