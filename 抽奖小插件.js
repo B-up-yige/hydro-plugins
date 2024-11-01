@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         hydro抽奖小插件
 // @namespace    http://tampermonkey.net/
-// @version      1.2.6
+// @version      1.2.7
 // @description  https://github.com/B-up-yige/hydro-plugins
 // @author       yige123
 // @homepage     https://github.com/B-up-yige/hydro-plugins
@@ -77,7 +77,7 @@
     }
 
     //获取有效人数
-    function getValid(){
+    function getValid(scLimit){
         valid = [];
 
         if(acm.length){
@@ -92,7 +92,7 @@
             for(var i = 0; i < ioi.length; i++){
                 var solve = Number(ioi[i].getElementsByTagName("span")[0].innerText);
                 var isRank = (rank[i].getElementsByTagName("span")[0].innerText != "*");
-                if(solve > 0 && isRank){
+                if(parseInt(solve) > scLimit && isRank){
                     valid.push(i);
                 }
             }
@@ -114,7 +114,13 @@
 
         numberOfPeople = input.value;
 
-        getValid();
+        var scLimit = 0;
+        if(ioi.length){
+            div = document.getElementById("scoreLimit");
+            input = div.getElementsByTagName("input")[0];
+            scLimit = input.value;
+        }
+        getValid(scLimit);
 
         draw(20, 25);
     }
@@ -159,4 +165,19 @@
     div.style.display = "inline";
     div.appendChild(input);
     document.getElementsByClassName("section__header")[0].appendChild(div);
+
+    if(ioi.length){
+        input = document.createElement("input");
+        input.value = 0;
+        input.type = "number";
+        input.min = 0;
+
+        div = document.createElement("div")
+        div.innerHTML = "分数阈值：";
+        div.id = "scoreLimit";
+        div.style.marginLeft = "10px";
+        div.style.display = "inline";
+        div.appendChild(input);
+        document.getElementsByClassName("section__header")[0].appendChild(div);
+    }
 })();
